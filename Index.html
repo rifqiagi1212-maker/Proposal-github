@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dari Aku Untuk Kamu</title>
+    <!-- PASTIKAN KONEKSI INTERNET AKTIF UNTUK MEMUAT SCRIPT INI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Impor Font Playfair Display dan Inter (Membutuhkan Internet) */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+        
+        :root {
+            --pink-light: #fce7f3;
+            --pink-medium: #fbcfe8;
+            --pink-dark: #9d174d;
+            --pink-accent: #db2777;
+            --text-color: #3f000b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--pink-light); 
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        /* --- STYLING UNTUK PROPOSAL (SHEET) --- */
+        .page-sheet {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(150, 0, 0, 0.1), 0 0 0 5px var(--pink-medium); 
+            border-radius: 20px;
+            padding: 4rem 2.5rem; 
+            margin-bottom: 3.5rem; 
+        }
+
+        .header-title-main {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--pink-dark); 
+            font-size: 2.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+        }
+
+        .header-subtitle {
+            font-family: 'Playfair Display', serif;
+            color: #be185d; 
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 6rem; 
+        }
+        
+        .header-name-tag {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--pink-accent);
+            margin-top: 0.5rem;
+        }
+        
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            color: var(--pink-dark); 
+            font-size: 2rem;
+            border-bottom: 3px solid #f472b6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .point-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--pink-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .point-text {
+            font-size: 1rem;
+            color: #525252;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid #f9a8d4;
+            text-align: left;
+        }
+
+        .resolution-box {
+            background: linear-gradient(145deg, #fbcfe8, #f472b6); 
+            color: #ffffff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            line-height: 1.4;
+            margin: 2rem 0;
+            border: 4px solid var(--pink-dark);
+            text-align: center;
+        }
+        
+        .signature-block {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .signature-area {
+            width: 45%;
+        }
+        
+        .signature-line {
+            height: 60px; 
+            border-bottom: 2px dashed var(--pink-dark);
+            margin-bottom: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        #pin-input {
+            width: 100%;
+            max-width: 250px;
+            padding: 0.75rem;
+            border: 2px solid #f9a8d4;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--pink-dark);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #pin-input:focus {
+            border-color: var(--pink-accent);
+        }
+
+        /* Kelas untuk animasi pesan error */
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            20%, 60% {transform: translateX(-10px);}
+            40%, 80% {transform: translateX(10px);}
+        }
+
+        @media (max-width: 640px) {
+            .page-sheet { padding: 2rem 1rem; margin-bottom: 2rem; }
+            .header-title-main { font-size: 2rem; }
+            .header-subtitle { font-size: 1rem; margin-bottom: 3rem; }
+            .header-name-tag { font-size: 1.25rem; }
+            .section-header { font-size: 1.5rem; }
+            .point-title { font-size: 1.1rem; }
+            .resolution-box { font-size: 1.1rem; padding: 1.5rem; }
+            .signature-block { display: block; margin-top: 3rem; }
+            .signature-area { width: 100%; margin-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN - Tampil di awal -->
+<div id="welcome-screen" class="fixed inset-0 flex flex-col items-center justify-center transition-opacity duration-700 bg-[var(--pink-light)] z-50 p-6">
+    <div class="text-center">
+        <p class="text-5xl md:text-7xl mb-4 text-pink-700">💌</p>
+        <h1 class="font-['Playfair_Display'] text-3xl md:text-5xl font-black text-[var(--pink-dark)] mb-6 tracking-wider">
+            DARI AKU UNTUK KAMU
+        </h1>
+        
+        <!-- PIN INPUT SECTION -->
+        <div id="pin-section" class="flex flex-col items-center mb-8">
+            <p class="text-lg text-gray-700 mb-4">Masukkan Kode Rahasia:</p>
+            <input type="password" id="pin-input" placeholder="****" maxlength="4" pattern="[0-9]*" inputmode="numeric">
+            <p id="pin-message" class="text-sm text-red-600 mt-2 font-semibold invisible">PIN salah. Coba lagi!</p>
+            
+            <button onclick="checkPin()" 
+                    id="check-button"
+                    class="mt-6 px-6 py-2 bg-pink-400 text-white font-semibold rounded-lg shadow-md hover:bg-pink-500 transition duration-300 active:scale-95">
+                Buka
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- PROPOSAL CONTENT - Tersembunyi di awal, muncul setelah tombol diklik -->
+<div id="proposal-content" class="opacity-0 hidden w-full min-h-screen pt-10 flex flex-col items-center transition-opacity duration-700">
+
+    <!-- SHEET 1: SAMPUL JUDUL -->
+    <div class="page-sheet text-center">
+        <p class="text-5xl mb-6">💖</p>
+        <h1 class="header-title-main font-black">PROPOSAL PENGAJUAN<br>HUBUNGAN SERIUS</h1>
+        <h2 class="header-subtitle">"Tujuan Akhir dari Seluruh Perjalanan, Tempat Jiwa Bersemi Abadi"</h2> 
+        
+        <div class="mt-12">
+            <p class="text-xl font-semibold text-gray-700">Diajukan oleh:</p>
+            <p class="header-name-tag">Agi Rifqiansyah</p>
+        </div>
+        
+        <div class="mt-6">
+            <p class="text-xl font-semibold text-gray-700">Kepada Ytk:</p>
+            <p class="header-name-tag">Siti Aprilia Malika Zalianty S.s</p>
+        </div>
+    </div>
+
+    <!-- SHEET 2: ISI (ALASAN) -->
+    <div class="page-sheet">
+        <h2 class="section-header">I. Kamu (Alasan Aku Yakin)</h2>
+
+        <p class="text-base italic mb-6 text-gray-600">
+            "Meskipun pertemuan kita singkat, tapi aku yakin, kamu lah **cahaya** yang akan menerangi gelapku."
+        </p>
+
+        <!-- JUDUL SUB-BAGIAN -->
+        <h3 class="text-lg font-semibold text-pink-700 mb-4 border-b border-pink-100 pb-1">Tiga alasan aku, knapa kamu pantas di perjuangkan:</h3>
+
+        <div class="space-y-4">
+            <div>
+                <p class="point-title">1. Dewasa dan Penuh Pengertian</p>
+                <p class="point-text">Kamu punya pikiran yang dewasa, selalu mengerti keadaanku, dan bisa jadi penenang saat aku sedang resah.</p>
+            </div>
+            <div>
+                <p class="point-title">2. Effort</p>
+                <p class="point-text">Aku merasa nggak sendirian. Kamu nggak cuma menerima, tapi juga berjuang sekuat yang aku lakukan. Hal yang sebelumnya tidak pernah aku rasakan.</p>
+            </div>
+            <div>
+                <p class="point-title">3. Rumah kedua</p>
+                <p class="point-text">Sifatmu yang apa adanya dan aura positifmu itu bikin aku nyaman banget, seperti akhirnya menemukan tempat **rumah** untuk aku bisa melepas lelah.</p>
+            </div>
+        </div>
+
+        <p class="text-center font-semibold text-pink-700 mt-6 pt-4 border-t border-pink-200">
+            Kamu adalah jawaban yang selama ini aku cari, yang menghilangkan semua keraguanku
+        </p>
+    </div>
+
+    <!-- SHEET 3: TUJUAN (KOMITMEN DAN PERTANYAAN) -->
+    <div class="page-sheet">
+        <h2 class="section-header">II. Harapan dan Komitmen Kita</h2>
+
+        <p class="text-base italic mb-4 text-gray-600 text-center">
+            "Setelah semua kata terucap dari hati, kini hanya ada satu langkah besar yang ingin aku ambil bersamamu."
+        </p>
+        
+        <p class="text-5xl mb-4 text-center">💍</p> 
+
+        <div class="resolution-box shadow-2xl">
+            "Siti Aprilia Malika Zalianty S.s, maukah kamu menemani dan menjadi rumah bagiku? Maukah kamu menjadi satu-satunya, teman hidupku, dan memulai cerita abadi ini bersamaku?"
+        </div>
+        
+        <p class="text-xl font-bold text-pink-800 text-center mt-12">
+            Aku ingin kamu menjadi **titik akhir** dari segala perjalanan yang panjang ini.
+        </p>
+    </div>
+
+    <!-- SHEET 4: KOLOM PENGESAHAN -->
+    <div class="page-sheet">
+        <h2 class="section-header">III. PENGESAHAN</h2>
+
+        <div class="signature-block">
+            <div class="signature-area">
+                <p class="text-lg font-semibold mb-2 text-pink-600">Persetujuan</p>
+                <div class="signature-line"></div> 
+                <!-- NAMA DIBUNGKUS KURUNG -->
+                <p class="font-bold text-lg text-pink-900 mt-2">(Siti Aprilia Malika Zalianty S.s)</p>
+            </div>
+            
+            <div class="signature-area">
+                <p class="text-lg font-semibold mb-2 text-pink-600">Pemohon</p> 
+                <!-- Garis putus-putus untuk tanda tangan -->
+                <div class="signature-line"></div> 
+                <!-- NAMA DIBUNGKUS KURUNG -->
+                <p class="font-bold text-lg text-pink-900 mt-2">(Agi Rifqiansyah)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dekorasi Bunga Penutup (Setelah Sheet Terakhir) -->
+    <div class="flower-footer text-center mt-6 pt-6 mb-12">
+        <p class="text-4xl space-x-3">
+            <span class="text-pink-600">🌷</span>
+            <span class="text-pink-800">🌹</span>
+            <span class="text-pink-600">💐</span>
+            <span class="text-pink-800">🌹</span>
+            <span class="text-pink-600">🌷</span>
+        </p>
+    </div>
+
+</div>
+
+<script>
+    // --- PIN SETUP ---
+    // PIN BARU: 1315
+    const correctPin = "1315";
+    // -----------------
+
+    const pinInput = document.getElementById('pin-input');
+    const pinMessage = document.getElementById('pin-message');
+
+    // Fungsi untuk mengecek PIN
+    window.checkPin = function() {
+        const enteredPin = pinInput.value;
+        pinMessage.classList.add('invisible');
+        pinInput.classList.remove('shake', 'border-red-500');
+
+        if (enteredPin === correctPin) {
+            // PIN Benar: Langsung buka proposal
+            openProposal();
+        } else {
+            // PIN Salah: Tampilkan pesan error dan efek shake
+            pinInput.classList.add('shake', 'border-red-500');
+            pinMessage.classList.remove('invisible');
+            pinInput.value = ''; // Kosongkan input
+        }
+    }
+
+    // Mengaktifkan pengecekan PIN saat menekan 'Enter'
+    pinInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            checkPin();
+        }
+    });
+
+    /**
+     * Fungsi untuk menghilangkan layar sambutan dan menampilkan proposal.
+     */
+    window.openProposal = function() {
+        const welcome = document.getElementById('welcome-screen');
+        const proposal = document.getElementById('proposal-content');
+        
+        // 1. Mulai efek fade-out pada layar sambutan
+        welcome.classList.add('opacity-0');
+
+        // 2. Setelah 700ms (durasi transisi), sembunyikan layar sambutan
+        setTimeout(() => {
+            welcome.classList.add('hidden');
+            welcome.classList.remove('z-50'); 
+            
+            // 3. Tampilkan konten proposal
+            proposal.classList.remove('hidden');
+
+            // 4. Setelah proposal ditampilkan, mulai efek fade-in/pop
+            setTimeout(() => {
+                proposal.classList.add('opacity-100');
+                document.body.style.backgroundColor = 'var(--pink-light)';
+            }, 10); 
+        }, 700); 
+    }
+</script>
+
+</body>
+</html>
+
